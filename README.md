@@ -1,6 +1,6 @@
 # 🔐 Authentication System
 
-**A comprehensive user management system implementing modern authentication patterns. Features secure user registration, session management, and role-based access control with protected routes—replicating the authentication flows that real applications require.**
+A comprehensive user management system implementing modern authentication patterns. Features secure user registration, session management, and role-based access control with protected routes—replicating the authentication flows that real applications require.
 
 [![Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://user-auth-proto.vercel.app/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
