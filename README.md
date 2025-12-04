@@ -57,7 +57,7 @@ A comprehensive user management system implementing modern authentication patter
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/SaravananWD/user-auth.git
+    git clone https://github.com/falsydev/user-auth.git
     cd user-auth
     ```
 
@@ -303,4 +303,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with ❤️ by [Saravanan](https://github.com/SaravananWD)**
+**Built with ❤️ by [Saravanan](https://github.com/falsydev)**
