@@ -51,7 +51,7 @@ const Footer = () => {
       <span>
         This demo showcases a user authentication system built by{" "}
         <Link
-          href="https://github.com/SaravananWD/"
+          href="https://saravanan.dev/"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -60,7 +60,7 @@ const Footer = () => {
         during his systematic React development journey.
         <br /> Source code available at{" "}
         <Link
-          href="https://github.com/SaravananWD/user-auth"
+          href="https://github.com/falsydev/user-auth"
           target="_blank"
           rel="noopener noreferrer"
         >
