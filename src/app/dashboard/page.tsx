@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import styled from "styled-components";
 import Link from "next/link";
@@ -26,13 +27,42 @@ import useInterval from "@/custom-hooks/useInterval";
 import useTimeout from "@/custom-hooks/useTimeout";
 import AuthProtoHeader from "@/components/AuthProtoHeader";
 
+type UserRole = "admin" | "user";
+
+interface User {
+  name?: string;
+  role?: UserRole;
+  emailVerified?: boolean;
+}
+
+interface EmailVerificationAlertProps {
+  user: User | null;
+  mailSent: boolean;
+  mailCount: number;
+  mailError: string | null;
+  resendVerificationEmail: () => Promise<void>;
+  mailLoading: boolean;
+}
+
 function DashboardApp() {
-  const { user, logout, reload, loadingAuth, sendEmail } = useAuth();
+  const {
+    user,
+    logout,
+    reload,
+    loadingAuth,
+    sendEmail,
+  }: {
+    user: User | null;
+    logout: () => Promise<void>;
+    reload: () => Promise<void>;
+    loadingAuth: boolean;
+    sendEmail: () => Promise<void>;
+  } = useAuth();
   const [isLoggingOut, setIsLoggingOut] = React.useState(false);
 
   const [mailSent, setMailSent] = React.useState(false);
   const [mailCount, setMailCount] = React.useState(0);
-  const [mailError, setMailError] = React.useState(null);
+  const [mailError, setMailError] = React.useState<string | null>(null);
   const [mailLoading, setMailLoading] = React.useState(false);
 
   const router = useRouter();
@@ -70,7 +100,7 @@ function DashboardApp() {
         await logout();
         router.push("/login");
       } catch (err) {
-        console.error(err.message);
+        console.error((err as Error).message);
       }
     }, 1500);
   }, [setTimeoutSafe, logout, router]);
@@ -91,7 +121,7 @@ function DashboardApp() {
         }
       }, 1000);
     } catch (err) {
-      setMailError("Something went wrong. Try again later.", err);
+      setMailError("Something went wrong. Try again later.");
     } finally {
       setMailLoading(false);
     }
@@ -143,7 +173,9 @@ function DashboardApp() {
                   </Link>
                 </li>{" "}
               </ul>
-              <DemoButton onClick={handleLogout}>Log out</DemoButton>
+              <DemoButton onClick={handleLogout} icon={null}>
+                Log out
+              </DemoButton>
             </div>
 
             {user?.role === "admin" ? (
@@ -210,8 +242,6 @@ const LogoutOverlay = () => {
   );
 };
 
-import PropTypes from "prop-types";
-
 const EmailVerificationAlert = ({
   user,
   mailSent,
@@ -219,7 +249,7 @@ const EmailVerificationAlert = ({
   mailError,
   resendVerificationEmail,
   mailLoading,
-}) => {
+}: EmailVerificationAlertProps) => {
   return (
     <>
       {user?.emailVerified === false ? (
@@ -252,15 +282,6 @@ const EmailVerificationAlert = ({
       ) : null}
     </>
   );
-};
-
-EmailVerificationAlert.propTypes = {
-  user: PropTypes.object,
-  mailSent: PropTypes.bool.isRequired,
-  mailCount: PropTypes.number.isRequired,
-  mailError: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  resendVerificationEmail: PropTypes.func.isRequired,
-  mailLoading: PropTypes.bool.isRequired,
 };
 
 const LoadingPrompt = () => {
