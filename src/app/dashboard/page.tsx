@@ -91,7 +91,7 @@ function DashboardApp() {
     return () => {
       window.removeEventListener("focus", handleFocus);
     };
-  }, []);
+  }, [user, loadingAuth, reload]);
 
   const handleLogout = React.useCallback(async () => {
     setIsLoggingOut(true);
@@ -125,7 +125,7 @@ function DashboardApp() {
     } finally {
       setMailLoading(false);
     }
-  }, [sendEmail]);
+  }, [sendEmail, setIntervalSafe, clearIntervalSafe]);
 
   const emailVerificationAlertValues = {
     user,
